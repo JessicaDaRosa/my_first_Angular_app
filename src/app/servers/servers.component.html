@@ -1,2 +1,25 @@
-<app-server></app-server>
-<app-server></app-server>
+<label>Server Name :</label>
+<input type="text" class="form-control" (input)="onUpdateServerName($event)">
+<input type="text" class="form-control" [(ngModel)]="serverName">
+<p>{{serverName}}</p>
+<button 
+    class = "bnt bnt-primary" 
+    [disabled]="!allowNewServer"
+    (click)="onCreateServer()">
+        Add server
+</button>
+
+<p [innerText]="allowNewServer"></p>
+<p>{{serverCreationStatus}}</p>
+
+<hr>
+
+<label>User name:</label>
+<input type="text" class="form-control" [(ngModel)]="userName">
+<p> {{userName}}</p>
+<button
+    class = "bnt bnt-primary" 
+    [disabled]="userName === ''"
+    (click)="onClearUserName()">
+        Clear
+</button>
