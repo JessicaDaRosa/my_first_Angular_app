@@ -1,25 +1,52 @@
-<label>Server Name :</label>
-<input type="text" class="form-control" (input)="onUpdateServerName($event)">
-<input type="text" class="form-control" [(ngModel)]="serverName">
-<p>{{serverName}}</p>
-<button 
-    class = "bnt bnt-primary" 
-    [disabled]="!allowNewServer"
-    (click)="onCreateServer()">
-        Add server
-</button>
+<div class="example">
+    <label for="staticServerName">Server Name :</label>
+    <input type="text" (input)="onUpdateServerName($event)" id="staticServerName">
+    <br>
+    <label for="dynamicServerName">Dynamic Server Name:</label>
+    <input type="text"  [(ngModel)]="serverName" id="dynamicServerName">
+    <p>{{serverName}}</p>
+    <button 
+        class = "bnt bnt-primary" 
+        [disabled]="!allowNewServer"
+        (click)="onCreateServer()">
+            Add server
+    </button>
 
-<p [innerText]="allowNewServer"></p>
-<p>{{serverCreationStatus}}</p>
+    <p [innerText]="allowNewServer"></p>
+    <p>{{serverCreationStatus}}</p>
+    <p *ngIf="serverCreated; else noServer" >Server was created, server  name is {{ serverName }}</p>
+    <ng-template #noServer>
+        <p>No server was created</p>
+    </ng-template>
+    <app-server *ngFor="let server of servers"></app-server>
 
+</div>
 <hr>
-
-<label>User name:</label>
-<input type="text" class="form-control" [(ngModel)]="userName">
-<p> {{userName}}</p>
-<button
-    class = "bnt bnt-primary" 
-    [disabled]="userName === ''"
-    (click)="onClearUserName()">
-        Clear
-</button>
+<div class="exercise2">
+    <label for="user_name">User name:</label>
+    <input type="text"  [(ngModel)]="userName" id = "user_name">
+    <p> {{userName}}</p>
+    <button
+        class = "bnt bnt-primary" 
+        [disabled]="userName === ''"
+        (click)="onClearUserName()">
+            Clear
+    </button>
+</div>
+<hr>
+<div class="exercise3">
+    <button (click)="onDisplayClick()" >Display Details</button>
+    <p>click counter : {{displayButtonClickCounter.length -1}} clicks</p>
+    <p *ngIf="diplayButtonClicked; else noText">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl nibh, consectetur at vestibulum nec, suscipit eu erat. Integer ac ultrices ipsum, sit amet commodo est. Nunc ut arcu ut mauris fringilla accumsan. Praesent vitae mauris sit amet mauris iaculis pretium. Ut nec est et sem volutpat consectetur. Mauris mattis nulla eget sem ultrices, quis feugiat lorem dapibus. Etiam nisi arcu, tristique at nisl sed, pellentesque mattis nisi. Mauris bibendum, elit vel mattis faucibus, quam tellus rhoncus quam, sit amet ullamcorper lacus urna sit amet lorem.
+    </p>
+    <ng-template #noText>
+        <p></p>
+    </ng-template>
+    <ul >
+        <li *ngFor="let click of displayButtonClickCounter; let index = index" >
+           <span *ngIf="index >= 4; else smaller5" [ngStyle]="{'background-color': 'pink'}">{{click}}</span>
+           <ng-template #smaller5>{{click}}</ng-template> 
+        </li>
+    </ul>
+</div>

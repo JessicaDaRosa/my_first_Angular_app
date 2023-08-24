@@ -10,9 +10,13 @@ import {FormsModule} from '@angular/forms'
 export class ServersComponent implements OnInit{
   allowNewServer = false;
   serverCreationStatus = 'No server was created';
+  serverCreated = false;
   serverName = '';
   userName = '';
   allowNewName = false;
+  servers = ["Server 1", "server 2"];
+  diplayButtonClicked = false;
+  displayButtonClickCounter = [0];
 
   constructor(){
     setTimeout(() => {
@@ -23,6 +27,8 @@ export class ServersComponent implements OnInit{
     
   }
   onCreateServer(){
+    this.serverCreated = true;
+    this.servers.push(this.serverName);
     this.serverCreationStatus = 'Server '+this.serverName+' was created!';
   }
   onUpdateServerName(event: any){
@@ -34,5 +40,10 @@ export class ServersComponent implements OnInit{
   }
   onClearUserName(){
     this.userName = '';
+  }
+  onDisplayClick(){
+    this.diplayButtonClicked = !this.diplayButtonClicked;
+    this.displayButtonClickCounter.push(this.displayButtonClickCounter.length);
+    
   }
 }
